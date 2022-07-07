@@ -15,7 +15,6 @@ def populateData(dr, fy, st):
     return col
 
 def printNums(name, dr, fy):
-
     firstYear = fy
     col = []
     x = "Commencement " + str(firstYear)
@@ -40,6 +39,8 @@ def printVidLength(colName, fx):
 def getVidLength(url):
     try:
         video = pafy.new(url)
+    except ValueError:
+        return "Have Video, not posted"
     except:
         return "PRIVATE VIDEO"
     else:
@@ -48,6 +49,7 @@ def getVidLength(url):
         timecode = ""
 
         # Math calculations for timecode
+        # Calculation from: https://www.inchcalculator.com/seconds-to-time-calculator/
         hour = math.floor(lenSeconds / 3600)
         finals.append(str(hour))
         min = math.floor(((lenSeconds/3600) - hour) * 60)
@@ -57,7 +59,7 @@ def getVidLength(url):
 
         # Populate array for timecode displaying
         for i in range(3):
-            if int(finals[i]) < 10:
+            if int(finals[i]) < 10: # Add zero before number if less than 10
                 finals[i] = "0"+str(finals[i])
             timecode += finals[i]+":"
 
@@ -65,20 +67,25 @@ def getVidLength(url):
         return timecode[:-1]
 
 # Opens links.txt file to read and returns list video timecodes
-def createVidLengthList():
+# Reverse order boolean to print out timecodes in reverse order or not
+def createVidLengthList(reverseOrder):
     timecodes = []
     f = "/Users/neoalabastro/Desktop/links.txt"
+    i = 0
     with open(f) as file_in:
         for line in file_in:
-            timecodes.insert(0, getVidLength(line))
-            print(timecodes[0])
+            li = getVidLength(line)
+            if reverseOrder:
+                timecodes.insert(0, li)
+                print(str(i+1) + ". " +timecodes[0]+" written")
+            else:
+                timecodes.append(li)
+                print(str(i+1) + ". " +timecodes[i]+" written")
+            i += 1
     return timecodes
 
 
 if __name__ == '__main__':
-    # printXlsx()
-    printVidLength("Length", createVidLengthList())
-    x = "Commencement"
-    y = 1973
-    # z = str(x)+"-"+str(x+1)
-    # printNums(x, 2019 - y, y)
+    #reverseOrder = True
+    #printVidLength("Length", createVidLengthList(reverseOrder))
+    printNums("sy", 2019-1970, 1971)
