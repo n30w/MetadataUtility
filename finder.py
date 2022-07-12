@@ -110,7 +110,7 @@ class FindMeOccurrences(object):
             match = re.search(keyword, str(row), re.IGNORECASE)
             if match:
                 collected.append(i)  # collected.append([i, row])
-        print(f"{str(len(collected))} entries found")
+        print(f"{str(len(collected))} entries of \"{keyword}\" found")
         return collected
 
     # Match DV Excel data to Main Excel document data
@@ -128,7 +128,6 @@ class FindMeOccurrences(object):
         # First for loop is to access each column
         for i in range(len(self.dv_names)):
             dv_data[self.dv_names[i]] = []
-
             # Second for loop is for each row
             for j in range(len(entry_list)):
                 # Access and store column data
@@ -137,9 +136,24 @@ class FindMeOccurrences(object):
 
         # Combine Students Included and Faculty Included
         df = pd.DataFrame(dv_data)
-        df["Names Notes"] = df["Faculty Included"] + " " + df["Students Included"]
-        print(df["Names Notes"])
+        for i in range(df.shape[0]):
+            if not df.iloc[i]["Students Included"] == "":
+                df["Names Notes"] = df["Faculty Included"] + "; " + df["Students Included"]
+            else:
+                df["Names Notes"] = df["Faculty Included"]
+
+        print(df["Students Included"])
         df.drop(columns=["Students Included", "Faculty Included"], inplace=True)
+
+        for i in range(df.shape[0]):
+            x = str(df.iloc[i]["Names Notes"])
+            if not x == "nan":
+                for j in range(len(x)):
+                    x = x.replace(",", ";")
+            else:
+                continue
+            df.iloc[i]["Names Notes"] = x
+
         dv_data = df.to_dict()
 
         # Get indices for list of the dv_data to iterate through
