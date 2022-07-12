@@ -6,7 +6,7 @@ import math
 # Populate data functions
 
 class VidHandler(object):
-    def __get_video_timecode(self, url):
+    def _get_video_timecode(self, url):
         try:
             video = pafy.new(url)
         except ValueError:
@@ -43,8 +43,8 @@ class VidHandler(object):
         i = 0
         with open(path) as file_in:
             for line in file_in:
-                li = self.__get_video_timecode(line)
-                if respect_order:
+                li = self._get_video_timecode(line)
+                if not respect_order:
                     timecodes.insert(0, li)
                     print(str(i + 1) + ". " + timecodes[0] + " written")
                 else:
