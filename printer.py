@@ -23,18 +23,18 @@ class ListMe(object):
         # One selection is a different output case
         match output_selection:
             case "plus":  # title + year (ex. Holoku 2003)
-                __x = __titles[title_num] + " " + str(__first_year)
+                __x = f"{__titles[title_num]} {str(__first_year)}"
                 for i in range(__data_range + 1):
                     __col.append(__x)
                     __first_year += 1
-                    __x = __titles[title_num] + " " + str(__first_year)
+                    __x = f"{__titles[title_num]} {str(__first_year)}"
                 return __col
             case "dash":  # year-year (ex. 1972-2010)
-                __y = str(__first_year) + "-" + str(__first_year + 1)
+                __y = f"{str(__first_year)} {str(__first_year + 1)}"
                 for i in range(__data_range):
                     __col.append(__y)
                     __first_year += 1
-                    __y = str(__first_year) + "-" + str(__first_year + 1)
+                    __y = f"{str(__first_year)} {str(__first_year + 1)}"
                 return __col
             case _:
                 return __col

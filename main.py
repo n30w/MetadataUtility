@@ -18,7 +18,5 @@ if __name__ == '__main__':
     # x.export_printer_to_file("/Users/neoalabastro/Desktop/prints.xlsx")
 
     # Export collection of selected DV names to Excel file
-    find = "2007-2008 Punahou Athletic Awards Ceremony"
-    x.export_collected_to_file("/Users/neoalabastro/Desktop/collected.xlsx",
-                               find
-                               )
+    find = "basketball"
+    x.export_collected_to_file("/Users/neoalabastro/Desktop/collected.xlsx", find)

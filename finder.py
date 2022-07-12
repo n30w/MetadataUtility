@@ -15,31 +15,6 @@ class FindMeVideo(object):
     def __init__(self):
         pass
 
-    def _get_video_urls(self, channel):
-        # Uses pytube library to get urls
-        # https://pytube.io/en/latest/user/channel.html
-        list_of_urls = []
-        c = Channel(channel)
-        for url in c.video_urls:
-            list_of_urls.append(url)
-            print("appending " + url)
-        print("Found " + str(len(list_of_urls)) + " videos!")
-        return list_of_urls
-
-    def _get_video_titles(self, list_):
-        title_list = []
-        for u in list_:
-            try:
-                video = pafy.new(u)
-                title_list.append(video.title)
-                print("added " + video.title)
-            except ValueError:
-                print("Video Private or DNE")
-                return
-            except AttributeError:
-                return
-        return title_list
-
     # Returns a full list of found video names
     def full_vid_list(self, channel):
         url_list = self._get_video_urls(channel)
@@ -49,7 +24,7 @@ class FindMeVideo(object):
             found_list.append([url_list[i], titles_list[i]])
         return found_list
 
-    # Regex search for only a certain name or phrase of video
+    # Regex search for only a certain name or phrase of video title
     def names(self, channel, field):
         url_list = self._get_video_urls(channel)
         titles_list = self._get_video_titles(url_list)
@@ -62,6 +37,33 @@ class FindMeVideo(object):
                     found_list.append(m)
         print(found_list)
         return found_list
+
+    @staticmethod
+    def _get_video_urls(channel):
+        # Uses pytube library to get urls
+        # https://pytube.io/en/latest/user/channel.html
+        list_of_urls = []
+        c = Channel(channel)
+        for url in c.video_urls:
+            list_of_urls.append(url)
+            print(f"appending {url}")
+        print(f"Found {str(len(list_of_urls))} videos!")
+        return list_of_urls
+
+    @staticmethod
+    def _get_video_titles(list_):
+        title_list = []
+        for u in list_:
+            try:
+                vt = pafy.new(u).title  # Video title
+                title_list.append(vt)
+                print(f"added {vt}")
+            except ValueError:
+                print("Video Private or DNE")
+                return
+            except AttributeError:
+                return
+        return title_list
 
 
 class FindMeOccurrences(object):
@@ -103,13 +105,12 @@ class FindMeOccurrences(object):
     def _collect_relevant(self, path, sn, col_name, keyword):
         df = self.x.from_path(path, sn)  # sn = sheet name
         collected = []
-        shape = df.shape
-        for i in range(shape[0]):
+        for i in range(df.shape[0]):
             row = df.iloc[i][col_name]  # accessed via [row][column]
             match = re.search(keyword, str(row), re.IGNORECASE)
             if match:
                 collected.append(i)  # collected.append([i, row])
-        print(str(len(collected)) + " entries found")
+        print(f"{str(len(collected))} entries found")
         return collected
 
     # Match DV Excel data to Main Excel document data

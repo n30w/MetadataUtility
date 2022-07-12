@@ -1,5 +1,4 @@
 import pandas as pd
-
 import finder
 import video
 import printer
