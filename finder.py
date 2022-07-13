@@ -82,6 +82,7 @@ class FindMeOccurrences(object):
                          "Physical Format",
                          "Transfer Notes",
                          "Notes",
+                         "DV Number",
                          "Faculty Included",
                          "Students Included"
                          ]
@@ -98,6 +99,7 @@ class FindMeOccurrences(object):
                            "Derivative Format Type",
                            "Transfer Notes",
                            "General Notes",
+                           "Original Digital ID",
                            "Names Notes",
                            ]
 
@@ -142,7 +144,6 @@ class FindMeOccurrences(object):
             else:
                 df["Names Notes"] = df["Faculty Included"]
 
-        print(df["Students Included"])
         df.drop(columns=["Students Included", "Faculty Included"], inplace=True)
 
         for i in range(df.shape[0]):
