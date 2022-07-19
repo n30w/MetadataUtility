@@ -10,7 +10,7 @@ if __name__ == '__main__':
     p = finder.FindMeFilePaths().get_paths()
     # Export entire channel to Excel document
     # x.export_found_to_file(
-    #     finder.FindMeVideo().full_vid_list("https://www.youtube.com/user/PUNAHOUSCHOOL"),
+    #     finder.FindMeVideo().full_vid_list("PUTURLHERE"),
     #     p["Desktop"] + "xh.xlsx"
     # )
 
