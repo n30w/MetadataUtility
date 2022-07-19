@@ -13,9 +13,9 @@ I'm using the Jetbrains PyCharm IDE. Installed dependencies in the project folde
 
 Since YouTube removed dislikes being shown, I edited the youtube-dl, *backend_youtube_dl.py* and commented out:
 
-- self._likes = self._ydl_info['like_count']
-- self._dislikes = self._ydl_info['dislike_count']
-- self._rating = self._ydl_info['average_rating']
+- `self._likes = self._ydl_info['like_count']`
+- `self._dislikes = self._ydl_info['dislike_count']`
+- `self._rating = self._ydl_info['average_rating']`
 
 ### Useful Links
 - [Markdown Guide](https://www.markdownguide.org/basic-syntax/)
@@ -33,8 +33,10 @@ Since YouTube removed dislikes being shown, I edited the youtube-dl, *backend_yo
 - [Class vs Static Method Tutorial](https://www.youtube.com/watch?v=BNFDOLE4Q5c)
 - [Python venv tutorial](https://www.infoworld.com/article/3239675/virtualenv-and-venv-python-virtual-environments-explained.html)
 - [Switching Terminal Between i386 and ARM](https://vineethbharadwaj.medium.com/m1-mac-switching-terminal-between-x86-64-and-arm64-e45f324184d9)
+- [Using Pip to Install to Anaconda Environment](https://stackoverflow.com/questions/41060382/using-pip-to-install-packages-to-anaconda-environment)
+- [Setting up Python on an M1 Mac](https://towardsdatascience.com/how-to-easily-set-up-python-on-any-m1-mac-5ea885b73fab)
 
-## Note About INTEL and ARM support
+## Note About Intel and ARM support
 Support for intel and arm is weird. To get this to work in pycharm or even run this with the needed dependencies for this project, one must first open terminal, go to the venv bin directory of this project then type:
 
 `env /usr/bin/arch -x86_64 /bin/zsh/`
@@ -45,7 +47,7 @@ Support for intel and arm is weird. To get this to work in pycharm or even run t
 
 `python3 (path to main.py)`
 
-## Using anaconda venv to run this on M1 architecture
+### Using anaconda venv to run this on M1 architecture
 I used anaconda package manager to solve the issue of M1 problems regarding the system architecture, x86_64 and arm64. I installed *anaconda* and *miniforge*. I first installed anaconda-navigator, then installed miniforge via brew install miniforge. I then ran the command:
 
 `conda create --name (name of environment) python=3.10`

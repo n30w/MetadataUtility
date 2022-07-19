@@ -9,6 +9,39 @@ import pandas as pd
 import pafy
 import re
 import xh
+import os
+
+
+class FindMeFilePaths(object):
+    def __int__(self):
+        pass
+
+    # get path locations from paths.txt file in main directory
+    @staticmethod
+    def get_paths():
+        # List of file directories
+        file_dirs = []
+
+        # check if path file exists, if not create it
+        try:
+            path = os.getcwd() + "/paths.txt"
+        except FileNotFoundError:
+            f = open("paths.txt", "w")
+            path = os.getcwd() + "/paths.txt"
+
+        with open(path) as file_in:
+            for line in file_in:
+                file_dirs.append(line)
+
+        # Rather inefficient but that's okay, I guess
+        # The [:-1] is to remove trailing \n
+        file_dict = {
+            "links": file_dirs[0][:-1],
+            "MovingImages": file_dirs[1][:-1],
+            "Desktop": file_dirs[2]
+        }
+
+        return file_dict
 
 
 class FindMeVideo(object):
@@ -71,37 +104,39 @@ class FindMeOccurrences(object):
         self.x = xh.IngestMe()
 
         # Copy of DV Inventory sheet column names
-        self.dv_names = ["Title",
-                         "Date of Event",
-                         "Class Years",
-                         "Grades",
-                         "Director",
-                         "Location",
-                         "Length (TRT) (HH:MM:SS)",
-                         "Original Format",
-                         "Physical Format",
-                         "Transfer Notes",
-                         "Notes",
-                         "DV Number",
-                         "Faculty Included",
-                         "Students Included"
-                         ]
+        self.dv_names = [
+            "Title",
+            "Date of Event",
+            "Class Years",
+            "Grades",
+            "Director",
+            "Location",
+            "Length (TRT) (HH:MM:SS)",
+            "Original Format",
+            "Physical Format",
+            "Transfer Notes",
+            "Notes",
+            "DV Number",
+            "Faculty Included",
+            "Students Included"
+        ]
 
         # Main sheet column names
-        self.main_names = ["Video Production Title",
-                           "Date",
-                           "Class Year",
-                           "Grade",
-                           "Contributor(s)",
-                           "Punahou Location",
-                           "Video Length (##:##:##)",
-                           "Original Format Type",
-                           "Derivative Format Type",
-                           "Transfer Notes",
-                           "General Notes",
-                           "Original Digital ID",
-                           "Names Notes",
-                           ]
+        self.main_names = [
+            "Video Production Title",
+            "Date",
+            "Class Year",
+            "Grade",
+            "Contributor(s)",
+            "Punahou Location",
+            "Video Length (##:##:##)",
+            "Original Format Type",
+            "Derivative Format Type",
+            "Transfer Notes",
+            "General Notes",
+            "Original Digital ID",
+            "Names Notes",
+        ]
 
     # Collect relevant key terms and return to array
     def _collect_relevant(self, path, sn, col_name, keyword):
@@ -116,16 +151,19 @@ class FindMeOccurrences(object):
         return collected
 
     # Match DV Excel data to Main Excel document data
+
     def match_me(self, keyword):
-        path1 = "/Users/neoalabastro/Desktop/MovingImages.xlsx"
-        dv_data= {}
+        p = FindMeFilePaths().get_paths()
+        path1 = p["MovingImages"]
+        dv_data = {}
         main_data = {}
         df = self.x.from_path(path1, "dv")
-        entry_list = self._collect_relevant(path1,
-                                            "dv",
-                                            "Title",
-                                            keyword
-                                            )
+        entry_list = self._collect_relevant(
+            path1,
+            "dv",
+            "Title",
+            keyword
+        )
 
         # First for loop is to access each column
         for i in range(len(self.dv_names)):

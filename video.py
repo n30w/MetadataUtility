@@ -3,10 +3,26 @@ import pafy
 import math
 
 
-# Populate data functions
-
 class VidHandler(object):
-    def _get_video_timecode(self, url):
+    # Opens links.txt file to read and returns list video timecodes
+    # respect_order boolean to print out timecodes in respected order from original file, or not
+    def return_vid_timecode_list(self, path, respect_order):
+        timecodes = []
+        i = 0
+        with open(path) as file_in:
+            for line in file_in:
+                li = self._get_video_timecode(line)
+                if not respect_order:
+                    timecodes.insert(0, li)
+                    print(str(i + 1) + ". " + timecodes[0] + " written")
+                else:
+                    timecodes.append(li)
+                    print(str(i + 1) + ". " + timecodes[i] + " written")
+                i += 1
+        return timecodes
+
+    @staticmethod
+    def _get_video_timecode(url):
         try:
             video = pafy.new(url)
         except ValueError:
@@ -35,20 +51,3 @@ class VidHandler(object):
 
             # [:-1] removes trailing colon
             return timecode[:-1]
-
-    # Opens links.txt file to read and returns list video timecodes
-    # respect_order boolean to print out timecodes in respected order from original file, or not
-    def return_vid_timecode_list(self, path, respect_order):
-        timecodes = []
-        i = 0
-        with open(path) as file_in:
-            for line in file_in:
-                li = self._get_video_timecode(line)
-                if not respect_order:
-                    timecodes.insert(0, li)
-                    print(str(i + 1) + ". " + timecodes[0] + " written")
-                else:
-                    timecodes.append(li)
-                    print(str(i + 1) + ". " + timecodes[i] + " written")
-                i += 1
-        return timecodes
