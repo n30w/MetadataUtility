@@ -18,9 +18,11 @@ class FindMeFilePaths(object):
 
     # get path locations from paths.txt file in main directory
     @staticmethod
-    def get_paths():
+    def get_paths() -> dict:
         # List of file directories
-        file_dirs = []
+        file_dirs: list[str] = []
+        # Initialize path variable
+        path: str
 
         # check if path file exists, if not create it
         try:
@@ -35,7 +37,7 @@ class FindMeFilePaths(object):
 
         # Rather inefficient but that's okay, I guess
         # The [:-1] is to remove trailing \n
-        file_dict = {
+        file_dict: dict[str, str] = {
             "links": file_dirs[0][:-1],
             "MovingImages": file_dirs[1][:-1],
             "Desktop": file_dirs[2]
@@ -49,19 +51,20 @@ class FindMeVideo(object):
         pass
 
     # Returns a full list of found video names
-    def full_vid_list(self, channel):
+    def full_vid_list(self, channel) -> list:
         url_list = self._get_video_urls(channel)
         titles_list = self._get_video_titles(url_list)
-        found_list = []
+        found_list: list[list[str]] = []
         for i in range(len(url_list)):
             found_list.append([url_list[i], titles_list[i]])
         return found_list
 
     # Regex search for only a certain name or phrase of video title
-    def names(self, channel, field):
+    def names(self, channel, field) -> list:
         url_list = self._get_video_urls(channel)
         titles_list = self._get_video_titles(url_list)
-        found_list = []
+        found_list: list[list[str]] = []
+
         for i in range(len(field)):
             for j in range(len(titles_list)):
                 match = re.search(field[i], titles_list[j], re.IGNORECASE)
@@ -71,21 +74,25 @@ class FindMeVideo(object):
         print(found_list)
         return found_list
 
+    # Return list of video URLs via input of a Channel URL
     @staticmethod
-    def _get_video_urls(channel):
+    def _get_video_urls(channel: str) -> list:
         # Uses pytube library to get urls
         # https://pytube.io/en/latest/user/channel.html
-        list_of_urls = []
+        list_of_urls: list[str] = []
         c = Channel(channel)
+
         for url in c.video_urls:
             list_of_urls.append(url)
             print(f"appending {url}")
         print(f"Found {str(len(list_of_urls))} videos!")
+
         return list_of_urls
 
+    # Return list of video titles via input of a list of URLs
     @staticmethod
-    def _get_video_titles(list_):
-        title_list = []
+    def _get_video_titles(list_: list[str]) -> list | None:
+        title_list: list[str] = []
         for u in list_:
             try:
                 vt = pafy.new(u).title  # Video title
@@ -139,7 +146,7 @@ class FindMeOccurrences(object):
         ]
 
     # Collect relevant key terms and return to array
-    def _collect_relevant(self, path, sn, col_name, keyword):
+    def _collect_relevant(self, path, sn, col_name, keyword) -> list:
         df = self.x.from_path(path, sn)  # sn = sheet name
         collected = []
         for i in range(df.shape[0]):
@@ -151,12 +158,11 @@ class FindMeOccurrences(object):
         return collected
 
     # Match DV Excel data to Main Excel document data
-
-    def match_me(self, keyword):
-        p = FindMeFilePaths().get_paths()
-        path1 = p["MovingImages"]
-        dv_data = {}
-        main_data = {}
+    def match_me(self, keyword: str) -> dict:
+        p: dict[str, str] = FindMeFilePaths().get_paths()
+        path1: str = p["MovingImages"]
+        dv_data: dict[str, list] = {}
+        main_data: dict[str, list] = {}
         df = self.x.from_path(path1, "dv")
         entry_list = self._collect_relevant(
             path1,
@@ -193,10 +199,10 @@ class FindMeOccurrences(object):
                 continue
             df.iloc[i]["Names Notes"] = x
 
-        dv_data = df.to_dict()
+        dv_data: dict[str, list] = df.to_dict()
 
         # Get indices for list of the dv_data to iterate through
-        keys_list = list(dv_data)
+        keys_list: list = list(dv_data)
         # Populate main_data dictionary
         for i in range(len(self.main_names)):
             main_data[self.main_names[i]] = dv_data[keys_list[i]]

@@ -5,9 +5,22 @@ x = xh.ExcelHandler()
 f = finder.FindMeOccurrences()
 
 if __name__ == '__main__':
-    # Words to search for in youtube videos
-    # search_words = ["Library", "Librarian", "Book", "Books", "Learning", "Commons", "Reading", "Campus", "Cooke"]
     p = finder.FindMeFilePaths().get_paths()
+    z = finder.FindMeVideo()
+
+    # Words to search for in YouTube videos
+    search_words = [
+        "Library",
+        "Librarian",
+        "Book",
+        "Books",
+        "Learning",
+        "Commons",
+        "Reading",
+        "Campus",
+        "Cooke"
+    ]
+
     # Export entire channel to Excel document
     # x.export_found_to_file(
     #     finder.FindMeVideo().full_vid_list("PUTURLHERE"),
@@ -15,7 +28,15 @@ if __name__ == '__main__':
     # )
 
     # Export timecodes from links.txt
-    x.export_timecode_to_file(p["Desktop"] + "timecodes.xlsx")
+    x.export_timecode_to_file((p["Desktop"] + "timecodes.xlsx"), True)
+
+    # x.export_found_to_file(
+    #     z.names(
+    #         "Channel Name",
+    #         search_words
+    #     ),
+    #     p["Desktop"] + "found.xlsx"
+    # )
 
     # x.export_printer_to_file(p["Desktop"] + "prints.xlsx")
 

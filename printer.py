@@ -9,7 +9,7 @@ class ListMe(object):
     # 2. Baccalaureate
     # 3. Holoku
     # 4. Variety Show
-    def print_year_list(self, title_num, output_selection, first_year, last_year):
+    def print_year_list(self, title_num, output_selection, first_year, last_year) -> list:
         _first_year = first_year
         _data_range = last_year - _first_year
         _string_to_append = ""
