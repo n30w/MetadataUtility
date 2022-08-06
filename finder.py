@@ -51,7 +51,7 @@ class FindMeVideo(object):
         pass
 
     # Returns a full list of found video names
-    def full_vid_list(self, channel) -> list:
+    def full_vid_list(self, channel: str) -> list:
         url_list = self._get_video_urls(channel)
         titles_list = self._get_video_titles(url_list)
         found_list: list[list[str]] = []
@@ -60,7 +60,7 @@ class FindMeVideo(object):
         return found_list
 
     # Regex search for only a certain name or phrase of video title
-    def names(self, channel, field) -> list:
+    def find_from_channel(self, channel: str, field: list) -> list:
         url_list = self._get_video_urls(channel)
         titles_list = self._get_video_titles(url_list)
         found_list: list[list[str]] = []
@@ -70,6 +70,22 @@ class FindMeVideo(object):
                 match = re.search(field[i], titles_list[j], re.IGNORECASE)
                 if match:
                     m = [titles_list[j], url_list[j]]
+                    found_list.append(m)
+
+        print(found_list)
+        return found_list
+
+    # Path is path to Excel file, sn is sheet name, field are the search terms
+    @staticmethod
+    def find_from_excel(path: str, sn: str, field: list) -> list:
+        found_list: list[list[str]] = []
+        excel_rows = xh.IngestMe().from_path(path, sn)
+        for i in range(len(field)):
+            for j in range(len(excel_rows)):
+                match = re.search(field[i], excel_rows.iloc[j][0], re.IGNORECASE)
+                if match:
+                    print(f"matched: {match}!")
+                    m = [excel_rows.iloc[j][1], excel_rows.iloc[j][0]]
                     found_list.append(m)
         print(found_list)
         return found_list
@@ -146,7 +162,13 @@ class FindMeOccurrences(object):
         ]
 
     # Collect relevant key terms and return to array
-    def _collect_relevant(self, path, sn, col_name, keyword) -> list:
+    def _collect_relevant(
+            self,
+            path: str,
+            sn: str,
+            col_name: str,
+            keyword: str
+    ) -> list:
         df = self.x.from_path(path, sn)  # sn = sheet name
         collected = []
         for i in range(df.shape[0]):
@@ -154,7 +176,12 @@ class FindMeOccurrences(object):
             match = re.search(keyword, str(row), re.IGNORECASE)
             if match:
                 collected.append(i)  # collected.append([i, row])
+
         print(f"{str(len(collected))} entries of \"{keyword}\" found")
+
+        if len(collected) == 0:
+            return
+
         return collected
 
     # Match DV Excel data to Main Excel document data
@@ -184,7 +211,7 @@ class FindMeOccurrences(object):
         df = pd.DataFrame(dv_data)
         for i in range(df.shape[0]):
             if not df.iloc[i]["Students Included"] == "":
-                df["Names Notes"] = df["Faculty Included"] + "; " + df["Students Included"]
+                df["Names Notes"] = df["Faculty Included"].astype(str) + "; " + df["Students Included"].astype(str)
             else:
                 df["Names Notes"] = df["Faculty Included"]
 

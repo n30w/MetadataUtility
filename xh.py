@@ -39,8 +39,11 @@ class ExcelHandler(object):
 
     def export_collected_to_file(self, path: str, keyword: str) -> None:
         f = finder.FindMeOccurrences()
-        data: dict[str, list] = f.match_me(keyword)
-        self._excel_it(path, data)
+        try:
+            data = f.match_me(keyword)
+            self._excel_it(path, data)
+        except TypeError:
+            return
 
     # Turn the DataFrame into Excel file
     @staticmethod
