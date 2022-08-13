@@ -37,6 +37,12 @@ Since YouTube removed dislikes being shown, I edited the youtube-dl, *backend_yo
 - [Python Decorators](https://www.codingem.com/at-symbol-in-python/)
 - [Class vs Static Method Tutorial](https://www.youtube.com/watch?v=BNFDOLE4Q5c)
 
+### GUI Creation
+- [PyGui](https://www.csse.canterbury.ac.nz/greg.ewing/python_gui/)
+- [PySide2](https://pypi.org/project/PySide2/)
+- [wxpython](https://www.wxpython.org/pages/overview/#hello-world)
+- [TKinter](https://wiki.python.org/moin/TkInter)
+
 #### Virtual Environments
 - [Python venv tutorial](https://www.infoworld.com/article/3239675/virtualenv-and-venv-python-virtual-environments-explained.html)
 - [Switching Terminal Between i386 and ARM](https://vineethbharadwaj.medium.com/m1-mac-switching-terminal-between-x86-64-and-arm64-e45f324184d9)
