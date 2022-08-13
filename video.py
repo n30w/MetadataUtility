@@ -6,7 +6,7 @@ import math
 class VidHandler(object):
     # Opens links.txt file to read and returns list video timecodes
     # respect_order boolean to print out timecodes in respected order from original file, or not
-    def return_vid_timecode_list(self, path, respect_order):
+    def return_vid_timecode_list(self, path: str, respect_order: boolean) -> list:
         timecodes: list[str] = []
         i: int = 0
         with open(path) as file_in:
