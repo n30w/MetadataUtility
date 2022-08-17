@@ -37,7 +37,7 @@ Since YouTube removed dislikes being shown, I edited the youtube-dl, *backend_yo
 - [Python Decorators](https://www.codingem.com/at-symbol-in-python/)
 - [Class vs Static Method Tutorial](https://www.youtube.com/watch?v=BNFDOLE4Q5c)
 
-### GUI Creation
+#### GUI Creation
 - [PyGui](https://www.csse.canterbury.ac.nz/greg.ewing/python_gui/)
 - [PySide2](https://pypi.org/project/PySide2/)
 - [wxpython](https://www.wxpython.org/pages/overview/#hello-world)
@@ -56,7 +56,7 @@ Since YouTube removed dislikes being shown, I edited the youtube-dl, *backend_yo
 - [Pandas DataFrame Tutorial](https://www.tutorialspoint.com/python_pandas/python_pandas_dataframe.htm)
 
 #### Github
-= [Github .gitigonore](https://www.atlassian.com/git/tutorials/saving-changes/gitignore)
+- [Github .gitigonore](https://www.atlassian.com/git/tutorials/saving-changes/gitignore)
 
 ## Note about Intel and ARM support
 Support for intel and arm is weird. To get this to work in pycharm or even run this with the needed dependencies for this project, one must first open terminal, go to the venv bin directory of this project then type:
