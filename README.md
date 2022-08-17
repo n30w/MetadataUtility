@@ -55,6 +55,8 @@ Since YouTube removed dislikes being shown, I edited the youtube-dl, *backend_yo
 - [Pandas Remove/Drop Columns](https://stackoverflow.com/questions/40389018/dropping-multiple-columns-from-a-data-frame-using-python)
 - [Pandas DataFrame Tutorial](https://www.tutorialspoint.com/python_pandas/python_pandas_dataframe.htm)
 
+#### Github
+= [Github .gitigonore](https://www.atlassian.com/git/tutorials/saving-changes/gitignore)
 
 ## Note about Intel and ARM support
 Support for intel and arm is weird. To get this to work in pycharm or even run this with the needed dependencies for this project, one must first open terminal, go to the venv bin directory of this project then type:
