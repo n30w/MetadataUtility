@@ -3,7 +3,7 @@
 # Using regex, it will find it and give you the URL
 # The reason for creating this script is that the Punavision and
 # Punahou website don't have the search functions enabled on the YouTube channels
-
+import pandas
 from pytube import Channel
 import pandas as pd
 import pafy
@@ -52,8 +52,8 @@ class FindMeVideo(object):
 
     # Returns a full list of found video names
     def full_vid_list(self, channel: str) -> list:
-        url_list = self._get_video_urls(channel)
-        titles_list = self._get_video_titles(url_list)
+        url_list: list[str] = self._get_video_urls(channel)
+        titles_list: list[str] = self._get_video_titles(url_list)
         found_list: list[list[str]] = []
         for i in range(len(url_list)):
             found_list.append([url_list[i], titles_list[i]])
@@ -67,9 +67,9 @@ class FindMeVideo(object):
 
         for i in range(len(field)):
             for j in range(len(titles_list)):
-                match = re.search(field[i], titles_list[j], re.IGNORECASE)
+                match: object = re.search(field[i], titles_list[j], re.IGNORECASE)
                 if match:
-                    m = [titles_list[j], url_list[j]]
+                    m: list[str] = [titles_list[j], url_list[j]]
                     found_list.append(m)
 
         print(found_list)
@@ -79,24 +79,24 @@ class FindMeVideo(object):
     @staticmethod
     def find_from_excel(path: str, sn: str, field: list) -> list:
         found_list: list[list[str]] = []
-        excel_rows = xh.IngestMe().from_path(path, sn)
+        excel_rows: pandas.DataFrame = xh.IngestMe().from_path(path, sn)
         for i in range(len(field)):
             for j in range(len(excel_rows)):
-                match = re.search(field[i], excel_rows.iloc[j][0], re.IGNORECASE)
+                match: object = re.search(field[i], excel_rows.iloc[j][0], re.IGNORECASE)
                 if match:
                     print(f"matched: {match}!")
-                    m = [excel_rows.iloc[j][1], excel_rows.iloc[j][0]]
+                    m: list[str] = [excel_rows.iloc[j][1], excel_rows.iloc[j][0]]
                     found_list.append(m)
         print(found_list)
         return found_list
 
     # Return list of video URLs via input of a Channel URL
     @staticmethod
-    def _get_video_urls(channel: str) -> list:
+    def _get_video_urls(channel_url: str) -> list:
         # Uses pytube library to get urls
         # https://pytube.io/en/latest/user/channel.html
         list_of_urls: list[str] = []
-        c = Channel(channel)
+        c = Channel(channel_url)
 
         for url in c.video_urls:
             list_of_urls.append(url)

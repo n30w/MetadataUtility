@@ -6,9 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="ff9a48ff-97db-4111-ac30-51dd94ccf902" name="Changes" comment="Type Hints + Links&#10;&#10;Look, I'm new to type hints. I don't know how they work, so I kind of splattered them all over the place in the code. I think they're helpful since I'm usually a Java programmer and that thing is so strict when it comes to types. Anyway, I may improve these type hints later.&#10;&#10;I also reformatted and added more helpful links to the README.md. I had trouble with the venv on M1 as well, so I kind of added a tutorial to that.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TODO.md" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finder.py" beforeDir="false" afterPath="$PROJECT_DIR$/finder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/printer.py" beforeDir="false" afterPath="$PROJECT_DIR$/printer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video.py" beforeDir="false" afterPath="$PROJECT_DIR$/video.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,6 +125,8 @@
       <workItem from="1660240550121" duration="1965000" />
       <workItem from="1660242772337" duration="1889000" />
       <workItem from="1660370213314" duration="163000" />
+      <workItem from="1660724269905" duration="67000" />
+      <workItem from="1660773499884" duration="1193000" />
     </task>
     <task id="LOCAL-00001" summary="First update">
       <created>1657104106252</created>

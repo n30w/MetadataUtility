@@ -6,7 +6,7 @@ import math
 class VidHandler(object):
     # Opens links.txt file to read and returns list video timecodes
     # respect_order boolean to print out timecodes in respected order from original file, or not
-    def return_vid_timecode_list(self, path: str, respect_order: boolean) -> list:
+    def return_vid_timecode_list(self, path: str, respect_order: bool) -> list:
         timecodes: list[str] = []
         i: int = 0
         with open(path) as file_in:
@@ -41,17 +41,17 @@ class VidHandler(object):
 
             # Math calculations for timecode
             # Calculation from: https://www.inchcalculator.com/seconds-to-time-calculator/
-            hour = math.floor(len_seconds / 3600)
+            hour: int = math.floor(len_seconds / 3600)
             finals.append(str(hour))
-            mins = math.floor(((len_seconds / 3600) - hour) * 60)
+            mins: int = math.floor(((len_seconds / 3600) - hour) * 60)
             finals.append(str(mins))
-            secs = math.floor(((((len_seconds / 3600) - hour) * 60) - mins) * 60)
+            secs: int = math.floor(((((len_seconds / 3600) - hour) * 60) - mins) * 60)
             finals.append(str(secs))
 
             # Populate array for timecode displaying
             for i in range(3):
                 if int(finals[i]) < 10:  # Add zero before number if less than 10
-                    finals[i] = f"0{str(finals[i])}"
+                    finals[i]: str = f"0{str(finals[i])}"
                 timecode += f"{finals[i]}:"
 
             # [:-1] removes trailing colon

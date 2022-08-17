@@ -9,18 +9,18 @@ class ListMe(object):
     # 2. Baccalaureate
     # 3. Holoku
     # 4. Variety Show
-    def print_year_list(self, title_num, output_selection, first_year, last_year) -> list:
-        _first_year = first_year
-        _data_range = last_year - _first_year
-        _string_to_append = ""
-        _titles = (
+    def print_year_list(self, title_num: int, output_selection: str, first_year: int, last_year: int) -> list:
+        _first_year: int = first_year
+        _data_range: int = last_year - _first_year
+        _string_to_append: str = ""
+        _titles: tuple = (
             "Commencement",
             "Baccalaureate",
             "Holoku",
             "Variety Show"
         )
 
-        _col = []
+        _col: list = []
 
         # Different cases for different selections
         # One selection is a different output case
