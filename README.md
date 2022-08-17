@@ -1,4 +1,4 @@
-# QuickPrint
+# Metadata Utility
 Automation for Digital Archives 2022, written in python. Interprets data from text files and writes to Excel file for easy copy and paste into master google sheet.
 
 ### Python version 3.10+ required!
