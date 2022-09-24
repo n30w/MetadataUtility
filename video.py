@@ -51,7 +51,7 @@ class VidHandler(object):
             # Populate array for timecode displaying
             for i in range(3):
                 if int(finals[i]) < 10:  # Add zero before number if less than 10
-                    finals[i]: str = f"0{str(finals[i])}"
+                    finals[i] = f"0{str(finals[i])}"
                 timecode += f"{finals[i]}:"
 
             # [:-1] removes trailing colon
